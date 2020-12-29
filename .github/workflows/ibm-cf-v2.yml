@@ -41,7 +41,8 @@ jobs:
           -s "${IBM_CF_SPACE_NAME:-dev}"
     - name: Download Latest V2Ray
       run: |
-        DOWNLOAD_URL="https://github.com/XTLS/Xray-core/releases/download/v1.1.5/Xray-linux-64.zip"
+        new_ver=$(curl -s https://github.com/XTLS/Xray-core/releases/latest | grep -Po "(\d+\.){2}\d+")
+        DOWNLOAD_URL="https://github.com/XTLS/Xray-core/releases/download/v${new_ver}/Xray-linux-64.zip"
         curl -fsSL "$DOWNLOAD_URL" -o "latest-xray.zip"
         unzip latest-xray.zip xray geoip.dat geosite.dat
         rm latest-xray.zip
